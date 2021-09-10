@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.text.DecimalFormat;
 
 public class Sales {
 
@@ -20,6 +21,7 @@ public class Sales {
      */
 
     public static void main(String[] args) {
+        DecimalFormat round = new DecimalFormat("#.##");
 
         double price;
         int discount;
@@ -36,16 +38,16 @@ public class Sales {
         tax = Integer.parseInt(JOptionPane.showInputDialog("What is the sale tax?"));
 
         subtotal = price * quantity;
-        dSubtotal = subtotal * (1 - discount);
+        dSubtotal = subtotal * (1 - discount/100);
         taxTotal = dSubtotal * (tax/100.0);
         totalCost = dSubtotal + taxTotal;
 
-        JOptionPane.showMessageDialog("Subtotal: " + dSubtotal  +"\n Tax: " + tax + "%"  + "\nTotal Tax: " + taxTotal  + "\nTotal Cost:" + totalCost);
+        JOptionPane.showMessageDialog(null,"Subtotal: " + round.format(dSubtotal)  +"\nTax: " + round.format(tax) + "%"  + "\nTotal Tax: " + round.format(taxTotal)  + "\nTotal Cost: " + round.format(totalCost));
 
-        System.out.println("Subtotal: " + dSubtotal);
+        /*System.out.println("Subtotal: " + dSubtotal);
         System.out.println("Tax: " + tax + "%");
         System.out.println("Total Tax: " + taxTotal);
-        System.out.println("Total Cost:" + totalCost);
+        System.out.println("Total Cost:" + totalCost);*/
         System.exit(0);
 
 
