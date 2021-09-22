@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.sql.SQLOutput;
+import java.text.DecimalFormat;
 
 public class RPGCharacter {
 
@@ -14,9 +15,10 @@ public class RPGCharacter {
      The program should run using dialog boxes and the output should show ALL the character's stats including a name.
      */
     public static void main(String[] args) {
+        DecimalFormat round = new DecimalFormat("#.00");
         String name;
-        double strength , dex, sprt, damage;
-        int mana, spell, cloak;
+        double strength , dex, sprt, damage,mana, spell, cloak;
+
 
         //user input
         name = JOptionPane.showInputDialog("Name your character!");
@@ -24,21 +26,21 @@ public class RPGCharacter {
         dex = Double.parseDouble(JOptionPane.showInputDialog("Enter your characters level of dexterity"));
         sprt = Double.parseDouble(JOptionPane.showInputDialog("Enter your characters level of spirit."));
         //user stats
-        damage = (Math.round((strength * dex)/ (sprt/100.0)*10)/10);
-        mana = (int) ((int) damage * Math.round((damage/15.0) * (sprt/1000.0))/10)*10;
-        spell = (int) ((int) (strength * sprt)* 1.34);
-        cloak =  (int) ((int)(dex * sprt)* (strength * .4));
+        damage = (strength * dex)/ (sprt/100.0);
+        mana = damage *(damage/15.0) * (sprt/1000.0);
+        spell = (strength * sprt)* 1.34;
+        cloak = (dex * sprt)* (strength * .4);
 
         System.out.println(name + " Stats:");
-        System.out.println("Strength: " + strength);
-        System.out.println("Dexterity: " + dex);
-        System.out.println("Spirit: " + sprt);
+        System.out.println("Strength: " + round.format(strength));
+        System.out.println("Dexterity: " + round.format(dex));
+        System.out.println("Spirit: " + round.format(sprt));
         System.out.println(" ");
         System.out.println(name + "'s abilities constitute:");
-        System.out.println("Damage: " + damage);
-        System.out.println("Mana: " + mana);
-        System.out.println("Spell Capacity: " + spell);
-        System.out.println("Cloaking: " + cloak);
+        System.out.println("Damage: " + round.format(damage));
+        System.out.println("Mana: " + round.format(mana));
+        System.out.println("Spell Capacity: " + round.format(spell));
+        System.out.println("Cloaking: " + round.format(cloak));
         System.exit(0);
 
     }
